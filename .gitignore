@@ -111,3 +111,4 @@ venv.bak/
 dmypy.json
 
 # ines add-ons
+.idea/
