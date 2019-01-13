@@ -44,10 +44,8 @@ def plot_single_motif(ts_1d, motif_index, motif_point_list, pattern_list):
 
 
 def plot_k_motifs(k, ts_1d, mdl_cost_list, motif_point_list, pattern_list):
-    _mdl_cost_list = mdl_cost_list
-    for i in range(k):
-        motif_index = np.argmin(_mdl_cost_list)
+    sorted_index = np.argsort(mdl_cost_list)
+    for motif_index in sorted_index[0:k]:
         fig = plot_single_motif(ts_1d, motif_index, motif_point_list, pattern_list)
         plt.show()
-        del _mdl_cost_list[motif_index]
     return 'Plot completed'
