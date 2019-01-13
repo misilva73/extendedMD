@@ -58,4 +58,5 @@ def find_index_of_pattern_center_and_members(dist_mat, pattern_pos_list, R):
     #extract the center and members position in the subseq list
     center_pos = pattern_pos_list[center_index]
     members_pos = [pattern_pos_list[i] for i in members_index]
-    return center_pos, members_pos
+    mean_dist = np.min(sum_dist_list[count_subseq_list == max_num])/float(max_num)
+    return center_pos, members_pos, mean_dist

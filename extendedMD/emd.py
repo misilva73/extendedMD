@@ -12,5 +12,5 @@ def find_motifs_from_emd(multi_dim_ts, R, win_size, paa_size, alphabet_size=3, z
     sax_sequence = extract_sax_sequence(ts_1d, win_size, paa_size, alphabet_size, z_threshold)
     bs_seq, bs_len = extract_modified_bs_sequence(sax_sequence)
     bs_point = generate_bs_pointers(bs_len, win_size)
-    mdl_cost_list, motif_point_list, pattern_list = find_all_motif_candidates(ts_1d, bs_seq, bs_len, bs_point, R)
-    return ts_1d, mdl_cost_list, motif_point_list, pattern_list
+    mdl_cost_list, motif_point_list, pattern_list, mean_dist_list = find_all_motif_candidates(ts_1d, bs_seq, bs_len, bs_point, R)
+    return ts_1d, mdl_cost_list, motif_point_list, pattern_list, mean_dist_list
