@@ -30,7 +30,7 @@ def plot_single_motif(ts_1d, motif_index, motif_point_list, pattern_list):
     motif_pattern = pattern_list[motif_index]
     # Plots:
     fig = plt.figure(figsize=(12,5))
-    plt.suptitle('Pattern {} : {}% overlap'.format(motif_pattern))
+    plt.suptitle(motif_pattern)
     #subplot 1
     plt.subplot(2,1,1)
     plt.plot(ts_1d)
