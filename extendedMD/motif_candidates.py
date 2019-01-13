@@ -28,7 +28,6 @@ def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R):
             # compute the center the the members of the motif candidate and
             # return their position in the BS subsequence
             center_pos, members_pos, mean_dist = find_index_of_pattern_center_and_members(dist_mat, pattern_pos_list, R)
-            mean_dist_list.append(mean_dist)
             # if the pattern only has one subsequence, then it is not a motif
             if len(members_pos) < 2:
                 continue
@@ -45,6 +44,8 @@ def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R):
             motif_point_list.append(motif_point)
             # append the pattern to the pattern list
             pattern_list.append(pattern)
+            # append the mean_dist to the pattern list
+            mean_dist_list.append(mean_dist)
         print('motif candidates of size {} successfully extracted'.format(subseq_size))
         # go to the next subsequence size
         subseq_size = subseq_size + 1
