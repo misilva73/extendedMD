@@ -25,27 +25,31 @@ def compute_motif_overlap_ratio(motif_point_list):
     return overlap_ratio_list
 
 
-def plot_single_motif(ts_1d, motif_index, motif_point_list, pattern_list):
+def plot_single_motif(ts_1d, motif_index, motif_point_list, center_point_list, pattern_list):
     motif_pointers = motif_point_list[motif_index]
+    center_pointers = center_point_list[motif_index]
     motif_pattern = pattern_list[motif_index]
     # Plots:
-    fig = plt.figure(figsize=(12,5))
+    fig = plt.figure(figsize=(12,6))
     plt.suptitle(motif_pattern)
     #subplot 1
-    plt.subplot(2,1,1)
+    plt.subplot(3,1,1)
     plt.plot(ts_1d)
     for temp_point in motif_pointers:
         plt.plot(temp_point, ts_1d[temp_point], 'r')   
     #subplot 2
-    plt.subplot(2,1,2)
+    plt.subplot(3,1,2)
     for temp_point in motif_pointers:
         plt.plot(ts_1d[temp_point])
+    #subplot 3
+    plt.subplot(3,1,3)
+    plt.plot(ts_1d[center_pointers])
     return fig
 
 
-def plot_k_motifs(k, ts_1d, mdl_cost_list, motif_point_list, pattern_list):
+def plot_k_motifs(k, ts_1d, mdl_cost_list, motif_point_list, center_point_list, pattern_list):
     sorted_index = np.argsort(mdl_cost_list)
     for motif_index in sorted_index[0:k]:
-        fig = plot_single_motif(ts_1d, motif_index, motif_point_list, pattern_list)
+        fig = plot_single_motif(ts_1d, motif_index, motif_point_list, center_point_list, pattern_list)
         plt.show()
     return 'Plot completed'

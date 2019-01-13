@@ -9,6 +9,7 @@ from extendedMD.mdl import break_bs_len_seq, compute_pattern_mdl
 def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R):
     mdl_cost_list = []
     motif_point_list = []
+    motif_center_list = []
     pattern_list = []
     mean_dist_list = []
     subseq_size = 1
@@ -36,8 +37,10 @@ def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R):
             # and append it to the list
             motif_point = [subseq_point_list[i] for i in members_pos]
             motif_point_list.append(motif_point)
+            motif_center = subseq_point_list[center_pos]
+            motif_center_list.append(motif_center)
             pattern_list.append(pattern)
             mean_dist_list.append(mean_dist)
         print('motif candidates of size {} successfully extracted'.format(subseq_size))
         subseq_size = subseq_size + 1
-    return mdl_cost_list, motif_point_list, pattern_list, mean_dist_list
+    return mdl_cost_list, motif_point_list, motif_center_list, pattern_list, mean_dist_list
