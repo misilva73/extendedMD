@@ -6,7 +6,7 @@ from extendedMD.subseq_patterns import find_index_of_pattern_center_and_members
 from extendedMD.mdl import break_bs_len_seq, compute_pattern_mdl
 
 
-def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R):
+def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R, adaptive_break_points=True):
     mdl_cost_list = []
     motif_point_list = []
     motif_center_list = []
@@ -24,7 +24,8 @@ def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R):
                 continue
             pattern_ts_list, pattern_pos_list = get_all_subsequences_in_pattern(ts, subseq_bs_list, subseq_point_list, pattern)
             dist_mat = compute_dtw_dist_mat(pattern_ts_list, R)
-            center_pos, members_pos, mean_dist = find_index_of_pattern_center_and_members(dist_mat, pattern_pos_list, R)
+            center_pos, members_pos, mean_dist = find_index_of_pattern_center_and_members(dist_mat, subseq_point_list,
+                                                                                          pattern_pos_list, R)
             # if the pattern only has one subsequence, then it is not a motif
             if len(members_pos) < 2:
                 continue
