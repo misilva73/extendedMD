@@ -47,22 +47,24 @@ def find_index_of_pattern_center_and_members(dist_mat, subseq_point_list, patter
     members_pos = [pattern_pos_list[i] for i in members_index]
     return center_pos, members_pos, mean_dist
 
-
+    
 def prune_pattern_members(dist_row, pattern_point_list, R):
     members_in_radius_index = [index for index,value in enumerate(dist_row) if value < R]
-    dist_in_radius = [dist_row[i] for i in members_in_radius_index]
-    members_with_no_overlap_index = [members_in_radius_index[0]]
-    for i in range(1, len(members_in_radius_index)):
-        if lists_overlap(pattern_point_list[members_in_radius_index[i]],
-                         pattern_point_list[members_with_no_overlap_index[-1]]):
-            dist_in = dist_in_radius[members_with_no_overlap_index[-1]]
-            dist_out = dist_in_radius[members_in_radius_index[i]]
-            if dist_in > dist_out:
-                members_with_no_overlap_index = members_with_no_overlap_index[:-1]
+    if len(members_in_radius_index) < 2:
+        return members_in_radius_index
+    else:
+        members_with_no_overlap_index = [members_in_radius_index[0]]
+        for i in range(1, len(members_in_radius_index)):
+            if lists_overlap(pattern_point_list[members_in_radius_index[i]],
+                             pattern_point_list[members_with_no_overlap_index[-1]]):
+                dist_in = dist_row[members_with_no_overlap_index[-1]]
+                dist_out = dist_row[members_in_radius_index[i]]
+                if dist_in > dist_out:
+                    members_with_no_overlap_index = members_with_no_overlap_index[:-1]
+                    members_with_no_overlap_index.append(members_in_radius_index[i])
+            else:
                 members_with_no_overlap_index.append(members_in_radius_index[i])
-        else:
-            members_with_no_overlap_index.append(members_in_radius_index[i])
-    return members_with_no_overlap_index
+        return members_with_no_overlap_index
 
 
 def lists_overlap(l1, l2):

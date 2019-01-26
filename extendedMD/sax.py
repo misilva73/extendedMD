@@ -4,7 +4,7 @@ from saxpy.alphabet import cuts_for_asize
 from saxpy.sax import ts_to_string
 
 
-def extract_sax_sequence(ts, win_size, paa_size, alphabet_size=3, z_threshold=0.01, adaptive_break_points):
+def extract_sax_sequence(ts, win_size, paa_size, alphabet_size, adaptive_break_points, z_threshold=0.01):
     """Applies the sax transformation to a 1-dim time series"""
     if adaptive_break_points:
         sax_sequence = apply_adaptive_sax(ts, win_size, paa_size, alphabet_size, z_threshold)

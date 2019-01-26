@@ -6,7 +6,7 @@ from extendedMD.subseq_patterns import find_index_of_pattern_center_and_members
 from extendedMD.mdl import break_bs_len_seq, compute_pattern_mdl
 
 
-def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R, adaptive_break_points=True):
+def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R):
     mdl_cost_list = []
     motif_point_list = []
     motif_center_list = []
@@ -30,8 +30,6 @@ def find_all_motif_candidates(ts, bs_seq, bs_len, bs_point, R, adaptive_break_po
             if len(members_pos) < 2:
                 continue
             bs_segmentation_len_list = break_bs_len_seq(bs_len, members_pos, subseq_size)
-            # Exclude empty lists (happens when there's overlapping patterns) ------------------------ NEED TO CORRECT THIS!!!!
-            bs_segmentation_len_list = [item for item in bs_segmentation_len_list if len(item)>0]
             mdl_cost = compute_pattern_mdl(bs_segmentation_len_list)
             mdl_cost_list.append(mdl_cost)
             # extract the motif pointers (i.e. indices of the ts where all the motif members are located)
