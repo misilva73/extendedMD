@@ -35,23 +35,24 @@ def plot_single_motif(ts_1d, events_ts, motif_index, motif_point_list, center_po
     fig = plt.figure(figsize=(12,6))
     plt.suptitle(motif_pattern)
     #subplot 1
-    plt.subplot(3,1,1)
+    #plt.subplot(3,1,1)
+    plt.subplot2grid((2, 2), (0, 0), colspan=2)
     plt.plot(ts_1d, 'tab:gray')
     for temp_point in motif_pointers:
         plt.plot(temp_point, ts_1d[temp_point], 'tab:blue')
-    
-    plt.ylabel(yaxis_label)
-    plt.ylim(min(ts_1d), max(ts_1d))
     sns.scatterplot(x="index", y="var", hue="event", data=event_df[event_df['event']>0], legend=False,
                     palette=sns.xkcd_palette(['red', 'tangerine', 'greenish yellow']))
+    plt.ylabel(yaxis_label)
+    plt.xlabel('')
+    plt.ylim(min(ts_1d), max(ts_1d))
     #subplot 2
-    plt.subplot(3,1,2)
+    plt.subplot2grid((2, 2), (1, 0))
     for temp_point in motif_pointers:
         plt.plot(ts_1d[temp_point], 'tab:blue')
     plt.ylabel(yaxis_label)
     plt.ylim(min(ts_1d), max(ts_1d))
     #subplot 3
-    plt.subplot(3,1,3)
+    plt.subplot2grid((2, 2), (1, 1))
     plt.plot(ts_1d[center_pointers], 'tab:blue')
     plt.ylabel(yaxis_label)
     plt.ylim(min(ts_1d), max(ts_1d))
@@ -69,6 +70,5 @@ def plot_k_multdim_motifs(k, multidim_ts, events_ts, mdl_cost_list, motif_point_
     sorted_index = np.argsort(mdl_cost_list)
     for motif_index in sorted_index[0:k]:
         for column in multidim_ts.columns:
-            fig1 = plot_single_motif(multidim_ts[column].values, events_ts, motif_index, motif_point_list,
-                                     center_point_list, pattern_list, column)
+            fig1 = plot_single_motif(multidim_ts[column].values, events_ts, motif_index, motif_point_list, center_point_list, pattern_list, column)
             plt.show()
