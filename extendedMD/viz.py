@@ -58,10 +58,10 @@ def plot_single_motif(ts_1d, events_ts, motif_index, motif_point_list, center_po
     plt.ylim(min(ts_1d), max(ts_1d))
     return fig
 
-def plot_k_motifs(k, ts_1d, events_ts, mdl_cost_list, motif_point_list, center_point_list, pattern_list):
+def plot_k_motifs(k, ts_1d, events_ts, mdl_cost_list, motif_point_list, center_point_list, pattern_list, yaxis_label='pca time-series'):
     sorted_index = np.argsort(mdl_cost_list)
     for motif_index in sorted_index[0:k]:
-        fig = plot_single_motif(ts_1d, events_ts, motif_index, motif_point_list, center_point_list, pattern_list, 'pca time-series')
+        fig = plot_single_motif(ts_1d, events_ts, motif_index, motif_point_list, center_point_list, pattern_list, yaxis_label)
         plt.show()
     return 'Plot completed'
 

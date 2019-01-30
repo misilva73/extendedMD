@@ -1,9 +1,12 @@
 import numpy as np
-import pandas as pd
 
 
 def extract_pca_ts(multi_dim_ts):
-    """Reduces a multi-dimensional time-series to 1d using PCA"""
+    """
+    This function reduces a multi-dimensional time-series to 1d using PCA
+    :param multi_dim_ts: multi-dimensional time-series as a pandas dataframe
+    :return: ts_1d: 1-dimensional time-series (numpy array!)
+    """
     # compute vector with the mean of each time series
     means_vec = multi_dim_ts.agg('mean').values
     # compute the covariance matrix of the multi-dim time-series data
