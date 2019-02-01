@@ -25,7 +25,7 @@ def compute_dtw_dist_mat(ts_list, r=None):
     This function computes the pairwise distance matrix of a list of time-series with Dynamic Time Warping distance.
     It is based on dtaidistance package
     :param ts_list: list of time-series to compare pairwise
-    :param R: distance upper bound - if distance is higher than R, then computation stops and the distance is set as inf
+    :param r: distance upper bound - if distance is higher than R, then computation stops and the distance is set as inf
               this parameter serves merely for speeding up computation
     :return: dist_matrix
     """
@@ -33,3 +33,11 @@ def compute_dtw_dist_mat(ts_list, r=None):
     dist_matrix = np.triu(dist_matrix_vec) + np.triu(dist_matrix_vec).T
     np.fill_diagonal(dist_matrix, 0)
     return dist_matrix
+
+
+def compute_dwt_dist_between_ts_and_list(single_ts, ts_list, r):
+    dist_list = []
+    for ts in ts_list:
+        dist = dtw.distance(single_ts, ts, max_dist=r)
+        dist_list.append(dist)
+    return dist_list

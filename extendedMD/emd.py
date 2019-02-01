@@ -25,4 +25,4 @@ def find_motifs_from_emd(ts, r, win_size, paa_size, alphabet_size, adaptive_brea
     bs_sequence, bs_lengths = extract_modified_bs_sequence(sax_sequence)
     bs_pointers = generate_bs_pointers(bs_lengths, win_size)
     motif_candidates_dic_list = find_all_motif_candidates(ts_1d, bs_sequence, bs_lengths, bs_pointers, r)
-    return motif_candidates_dic_list
+    return motif_candidates_dic_list, ts_1d

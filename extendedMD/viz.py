@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -6,7 +5,7 @@ import seaborn as sns
 
 def create_motif_table(motif_dic_list):
     """
-    This function creates a pandas dataframe with a summary of each motif in motif_dic_list, sorted by MDL cost
+    This function creates a pandas dataframe with a summary of each motif in motif_dic_list
     :param motif_dic_list: list of dictionaries, where a dic is related to a single motif
     :return: motif_table_df
     """
@@ -21,7 +20,7 @@ def create_motif_table(motif_dic_list):
         'mdl_cost': mdl_cost_list,
         'mean_dist': mean_dist_list
     }
-    motif_table_df = pd.DataFrame(motif_table_dic).sort_values('mdl_cost')
+    motif_table_df = pd.DataFrame(motif_table_dic)
     return motif_table_df
 
 
@@ -39,7 +38,7 @@ def plot_single_motif(ts, events_ts, motif_dic, yaxis_label):
     """
     member_pointers = motif_dic['members_ts_pointers']
     center_pointers = motif_dic['center_ts_pointers']
-    event_df = pd.DataFrame([ts, events_ts.values]).T.reset_index()
+    event_df = pd.DataFrame([ts, events_ts]).T.reset_index()
     event_df.columns = ['index', 'var', 'event']
     # Plots:
     fig = plt.figure(figsize=(12, 6))

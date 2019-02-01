@@ -14,18 +14,20 @@ def find_pattern_center_and_members(pattern_dic_list, r):
     members_dic_list = find_all_pruned_members(0, pattern_dic_list, r)
     max_members_count = len(members_dic_list)
     min_mean_dist = np.mean([dist for dist in center_dic['dist_vec'] if dist < r])
-    for candidate_index, candidate_dic in enumerate(pattern_dic_list[1:]):
+    for candidate_index, candidate_dic in enumerate(pattern_dic_list[1:], 1):
         candidate_members_dic_list = find_all_pruned_members(candidate_index, pattern_dic_list, r)
         members_count = len(candidate_members_dic_list)
-        if members_count >= max_members_count:
-            mean_dist = np.mean([dist for dist in candidate_dic['dist_vec'] if dist < r])
-            if mean_dist < min_mean_dist:
-                center_dic = candidate_dic
-                members_dic_list = candidate_members_dic_list
-                max_members_count = members_count
-                min_mean_dist = mean_dist
-            else:
-                continue
+        mean_dist = np.mean([dist for dist in candidate_dic['dist_vec'] if dist < r])
+        if members_count > max_members_count:
+            center_dic = candidate_dic
+            members_dic_list = candidate_members_dic_list
+            max_members_count = members_count
+            min_mean_dist = mean_dist
+        elif (members_count == max_members_count) & (mean_dist < min_mean_dist):
+            center_dic = candidate_dic
+            members_dic_list = candidate_members_dic_list
+            max_members_count = members_count
+            min_mean_dist = mean_dist
         else:
             continue
     return center_dic, members_dic_list, min_mean_dist
