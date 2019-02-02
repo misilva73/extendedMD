@@ -45,23 +45,23 @@ def plot_single_motif(ts, events_ts, motif_dic, yaxis_label):
     plt.suptitle(motif_dic['pattern'])
     # subplot 1
     plt.subplot2grid((2, 2), (0, 0), colspan=2)
-    plt.plot(ts, 'tab:gray')
+    plt.plot(ts, 'xkcd:grey', alpha=0.5)
     for temp_point in member_pointers:
-        plt.plot(temp_point, ts[temp_point], 'tab:blue')
+        plt.plot(temp_point, ts[temp_point], 'xkcd:dark grey')
     sns.scatterplot(x="index", y="var", hue="event", data=event_df[event_df['event'] > 0], legend=False,
-                    palette=sns.xkcd_palette(['red', 'tangerine', 'greenish yellow']))
+                    palette=sns.xkcd_palette(['red', 'tangerine', 'grass green']))
     plt.ylabel(yaxis_label)
     plt.xlabel('')
     plt.ylim(min(ts), max(ts))
     # subplot 2
     plt.subplot2grid((2, 2), (1, 0))
     for temp_point in member_pointers:
-        plt.plot(ts[temp_point], 'tab:blue')
+        plt.plot(ts[temp_point], 'xkcd:dark grey')
     plt.ylabel(yaxis_label)
     plt.ylim(min(ts), max(ts))
     # subplot 3
     plt.subplot2grid((2, 2), (1, 1))
-    plt.plot(ts[center_pointers], 'tab:blue')
+    plt.plot(ts[center_pointers], 'xkcd:dark grey')
     plt.ylabel(yaxis_label)
     plt.ylim(min(ts), max(ts))
     return fig
