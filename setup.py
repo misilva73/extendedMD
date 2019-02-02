@@ -9,7 +9,7 @@ with open('requirements.txt') as fp:
 
 setuptools.setup(
     name="extendedMD",
-    version="0.7",
+    version="0.8",
     author="Maria Ines Silva",
     author_email="misilva73@gmail.com",
     description="A small example package",
