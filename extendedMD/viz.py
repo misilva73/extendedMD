@@ -24,22 +24,25 @@ def create_motif_table(motif_dic_list):
     return motif_table_df
 
 
-def plot_single_motif(ts, events_ts, motif_dic, yaxis_label):
+def plot_single_motif(ts, events_ts, motif_dic, y_label='Full 1-d time-series'):
     """
     This function creates the base visualization for a single motif:
      1) plot with the whole time-series highlighting the labels and the position of each motif's member
      2) plot with all the motif's members
      3) plot with the motif's center
     :param ts: original 1-dimensional time-series
-    :param events_ts: list of labels for each entry in ts
-    :param motif_dic: doctionary related to the motif
-    :param yaxis_label: label for the plot's y-axis
+    :param events_ts: list of labels for each entry in ts (max of 10 labels for avoiding color cycling in the plots)
+                      label == 0 is assumed to represent no events and thus it is not plotted
+    :param motif_dic: dictionary related to the motif
+    :param y_label: label to add in the y-axis of the first plot (optional and defaults to 'Full 1-d time-series')
     :return: fig - figure with the motif plot
     """
     member_pointers = motif_dic['members_ts_pointers']
     center_pointers = motif_dic['center_ts_pointers']
-    event_df = pd.DataFrame([ts, events_ts]).T.reset_index()
-    event_df.columns = ['index', 'var', 'event']
+    raw_event_df = pd.DataFrame([ts, events_ts]).T.reset_index()
+    raw_event_df.columns = ['index', 'var', 'event']
+    event_df = raw_event_df[raw_event_df['event'] > 0]
+    n_events = len(set(event_df['event'].values))
     # Plots:
     fig = plt.figure(figsize=(12, 6))
     plt.suptitle(motif_dic['pattern'])
@@ -48,26 +51,26 @@ def plot_single_motif(ts, events_ts, motif_dic, yaxis_label):
     plt.plot(ts, 'xkcd:grey', alpha=0.5)
     for temp_point in member_pointers:
         plt.plot(temp_point, ts[temp_point], 'xkcd:dark grey')
-    sns.scatterplot(x="index", y="var", hue="event", data=event_df[event_df['event'] > 0], legend=False,
-                    palette=sns.xkcd_palette(['red', 'tangerine', 'grass green']))
-    plt.ylabel(yaxis_label)
+    sns.scatterplot(x="index", y="var", hue="event", data=event_df, legend=False,
+                    palette=sns.color_palette(n_colors=n_events))
+    plt.ylabel(y_label)
     plt.xlabel('')
     plt.ylim(min(ts), max(ts))
     # subplot 2
     plt.subplot2grid((2, 2), (1, 0))
     for temp_point in member_pointers:
         plt.plot(ts[temp_point], 'xkcd:dark grey')
-    plt.ylabel(yaxis_label)
+    plt.ylabel("Motif's members")
     plt.ylim(min(ts), max(ts))
     # subplot 3
     plt.subplot2grid((2, 2), (1, 1))
     plt.plot(ts[center_pointers], 'xkcd:dark grey')
-    plt.ylabel(yaxis_label)
+    plt.ylabel("Motif's center")
     plt.ylim(min(ts), max(ts))
     return fig
 
 
-def plot_k_motifs(k, ts, events_ts, motif_dic_list, yaxis_label='pca time-series'):
+def plot_k_motifs(k, ts, events_ts, motif_dic_list):
     """
     This function shows the base visualisation for the first k motifs in motif_dic_list for the original 1-d time-series
     :param k: number of motifs to plot
@@ -78,7 +81,7 @@ def plot_k_motifs(k, ts, events_ts, motif_dic_list, yaxis_label='pca time-series
     :return: No return - shows the plots
     """
     for motif_dic in motif_dic_list[0:k]:
-        plot_single_motif(ts, events_ts, motif_dic, yaxis_label)
+        plot_single_motif(ts, events_ts, motif_dic)
         plt.show()
 
 

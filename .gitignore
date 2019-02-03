@@ -110,5 +110,6 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# ines add-ons
+# pycharm
 .idea/
+.DS_Store
