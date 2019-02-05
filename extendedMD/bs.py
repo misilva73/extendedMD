@@ -60,7 +60,7 @@ def get_bs_subsequences_dic_list(ts, bs_seq, bs_pointers, subseq_size):
     """
     bs_subseq_dic_list = []
     for i in range(len(bs_seq) - subseq_size + 1):
-        subseq_pointers = list(set(sum(bs_pointers[i:(i + subseq_size)], [])))
+        subseq_pointers = sorted(list(set(sum(bs_pointers[i:(i + subseq_size)], []))))
         subseq_dic = {
             'pattern': bs_seq[i:(i+subseq_size)],
             'pointers': subseq_pointers,
