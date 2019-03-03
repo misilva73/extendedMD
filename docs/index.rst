@@ -6,9 +6,20 @@
 Welcome to extendedMD's documentation!
 ======================================
 
+This repository contains a python implementation of the Extended Motif Discovery (EMD) algorithm for motif discovery in time-series.
+
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :caption: Usage
+
+   usage/installation
+   usage/emd
+
+
+.. toctree::
+   :caption: Modules
+
+   modules/bs
 
 
 

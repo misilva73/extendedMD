@@ -20,7 +20,7 @@ This packages is available on PyPI and thus can be directly installed with pip:
 
     pip install extendedMD
 
-Additionally, one can clone the repository and install it manually with the command:
+Alternatively, this package can installed from source by cloning this repository and installing it manually with the command:
 
     python setup.py install
 
