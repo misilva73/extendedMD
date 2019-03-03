@@ -1,6 +1,7 @@
-# EMD algorithm
+# Extended Motif Discovery algorithm
 
-This repository contains a python implementation of the EMD algorithm [1] for motif discovery in time-series.
+This repository contains a python implementation of the Extended Motif Discovery (EMD) algorithm [1] for motif 
+discovery in time-series.
 
 ## Prerequisites
 
@@ -17,7 +18,7 @@ This repository contains a python implementation of the EMD algorithm [1] for mo
 
 This packages is available on PyPI and thus can be directly installed with pip:
 
-    pip install dtaidistance
+    pip install extendedMD
 
 Additionally, one can clone the repository and install it manually with the command:
 
