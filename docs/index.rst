@@ -24,10 +24,4 @@ This repository contains a python implementation of the Extended Motif Discovery
    modules/bs
    modules/dtwdist
    modules/emd
-   modules/mdl
-   modules/motifs
-   modules/patterns
-   modules/pca
-   modules/pruning
-   modules/sax
-   modules/viz
+
