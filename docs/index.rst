@@ -11,6 +11,7 @@ This repository contains a python implementation of the Extended Motif Discovery
 
 .. toctree::
    :caption: Usage
+   :maxdepth: 1
 
    usage/installation
    usage/emd
@@ -18,14 +19,15 @@ This repository contains a python implementation of the Extended Motif Discovery
 
 .. toctree::
    :caption: Modules
+   :maxdepth: 1
 
    modules/bs
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   modules/dtwdist
+   modules/emd
+   modules/mdl
+   modules/motifs
+   modules/patterns
+   modules/pca
+   modules/pruning
+   modules/sax
+   modules/viz
