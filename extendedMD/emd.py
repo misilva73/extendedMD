@@ -7,15 +7,28 @@ import pandas as pd
 
 def find_motifs_from_emd(ts, r, win_size, paa_size, alphabet_size, adaptive_break_points=True, z_threshold=0.01):
     """
-    Returns the full list of motifs form a multi-dimensional time-series by running the extendedMD algorithm
-    :param ts: original 1-d time-series (numpy array)
+    Returns the full list of motifs from either a multi-dimensional or a 1-dimensional time-series by
+    running the extendedMD algorithm. If the time-series received is multi-dimensional (i.e. a pandas dataframe),
+    then the algorithm starts by applying PCA to reduce it to a single dimension.
+
+    :param ts: original time-series
+    :type ts: Union[1d array, DataFrame]
     :param r: maximum distance to the center of the motif
-    :param win_size:win_size: size fo the sliding wndow that generated each sax word
+    :type r: float
+    :param win_size: size fo the sliding window that generated each sax word
+    :type win_size: int
     :param paa_size: number of characters in a single sax word
+    :type paa_size: int
     :param alphabet_size: number of unique characters to use in the sax representation
-    :param adaptive_break_points: Whether to use a representation with adaptive break-points (boolean)
+    :type alphabet_size: int
+    :param adaptive_break_points: Whether to use a representation with adaptive break-points
+    :type adaptive_break_points: bool
     :param z_threshold: z_threshold for the znorm method from saxpy
-    :return: motif_candidates_dic_list
+    :type z_threshold: float
+    :return:
+        - motif_candidates_dic_list (:py:class:`list of dic`) - list of motif dictionaries
+        - ts_1d (:py:class:`1d array`) - 1-dimensional time-series either resulting from the PCA method or
+         the original 1-dimensional time-series
     """
     if isinstance(ts, pd.DataFrame):
         ts_1d = extract_pca_ts(ts)

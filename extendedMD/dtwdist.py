@@ -47,7 +47,7 @@ def compute_dwt_dist_between_ts_and_list(single_ts, ts_list, r):
     """
     This function computes the list of DTW distances between a single time-series and a list of time-series.
 
-    :param single_ts: 
+    :param single_ts:
     :param ts_list:
     :param r:
     :return:
