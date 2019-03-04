@@ -1,4 +1,4 @@
-extendedMD.dtwdist
+extendedMD.emd
 ------------------
 
 .. automodule:: extendedMD.emd
