@@ -6,9 +6,15 @@ def find_pattern_center_and_members(pattern_dic_list, r):
     This function finds the all the members of a motif (all non-overlapping subsequences with a distance to the motif
     center less than R) and and the motif's center (the subsequence with the maximal count of members and minimal mean
     distance)
+
     :param pattern_dic_list: list of dictionaries related to all the subsequences in the pattern
+    :type pattern_dic_list: list of dic
     :param r: maximum distance to the center of the motif
-    :return: center_dic, members_dic_list, min_mean_dist
+    :type r: float
+    :return:
+        - center_dic (:py:class:`dic`) - dictionary of the motif's center subsequence
+        - members_dic_list (:py:class:`list of dic`) - list of dictionaries related to all the motif's members
+        - min_mean_dist (:py:class:`float`) - mean distance between the motif's center and all the motif's members
     """
     center_dic = pattern_dic_list[0]
     members_dic_list = find_all_pruned_members(0, pattern_dic_list, r)
@@ -38,10 +44,15 @@ def find_all_pruned_members(center_index, pattern_dic_list, r):
     This function finds all the motif members assuming that the center of the motif is the BS sequence with index
     center_index. It returns the dictionaries related to the all the non-overlapping BS subsequences that have a
     distance to the center subsequence lower than R
+
     :param center_index: index of the center motif in the pattern_dic_list
+    :type center_index: int
     :param pattern_dic_list: list of dictionaries related to all the subsequences in the pattern
+    :type pattern_dic_list: list of dic
     :param r: maximum distance to the center
-    :return: pruned_member_list: list of dictionaries of the motif members
+    :type r: float
+    :return: list of dictionaries of the motif members
+    :rtype: list of dic
     """
     center_dic = pattern_dic_list[center_index]
     unpruned_members_list = [pattern_dic_list[i] for i, dist in enumerate(center_dic['dist_vec']) if dist < r]
@@ -67,9 +78,13 @@ def find_all_pruned_members(center_index, pattern_dic_list, r):
 def lists_overlap(l1, l2):
     """
     This functions return whether two lists overlap
+
     :param l1: list 1
+    :type l1: list
     :param l2: list 2
-    :return: TRUE if the list overlap
+    :type l2: list
+    :return: whether the list overlap. If TRUE, then the list overlap
+    :rtype: bool
     """
     intersection_set = set(l1).intersection(set(l2))
     overlaping_test = (len(intersection_set) > 0)

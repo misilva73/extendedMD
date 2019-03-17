@@ -5,9 +5,13 @@ def compute_motif_mdl_cost(members_dic_list, bs_len):
     """
     This function compute the MDL cost associated to the motif that generated the members in members_dic_list,
     as proposed by Tanaka et all
+
     :param members_dic_list: list of dictionaries related to the BS subsequences that belong to a motif
+    :type members_dic_list: list of dic
     :param bs_len: list of the lengths of each BS sequence
-    :return: mdl_cost
+    :type bs_len: list of int
+    :return: mdl cost
+    :rtype: float
     """
     split_bs_len_list = split_bs_len(members_dic_list, bs_len)
     mdl_cost = compute_segmentation_mdl_cost(split_bs_len_list)
@@ -18,9 +22,13 @@ def split_bs_len(members_dic_list, bs_len):
     """
     This function splits the BS sequence based on the position of the motif members
     (i.e. subsequences in members_dic_list). This is a middle step in the MDL cost computation proposed by Tanaka et all
+
     :param members_dic_list: list of dictionaries related to the BS subsequences that belong to a motif
+    :type members_dic_list: list of dic
     :param bs_len: list of the lengths of each BS sequence
-    :return: split_bs_len_list: list of split BS lengths
+    type bs_len: list of int
+    :return: list of split BS lengths
+    :rtype: list of list of int
     """
     bs_position_list = [dic['bs_position'] for dic in members_dic_list]
     break_points = [pos[0] for pos in bs_position_list]
@@ -47,8 +55,11 @@ def compute_segmentation_mdl_cost(seg_len_list):
     This function computes the MDL cost associated with the lengths split BS sequence.
     This is a middle step in the MDL cost computation proposed by Tanaka et all
     as proposed by Tanaka et all
+
     :param seg_len_list: list of split BS lengths
-    :return: mdl_cost
+    :type seg_len_list: list of list of int
+    :return: mdl cost
+    :rtype: float
     """
     par_cost_list = []
     data_cost_list = []

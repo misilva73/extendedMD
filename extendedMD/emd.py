@@ -27,8 +27,7 @@ def find_motifs_from_emd(ts, r, win_size, paa_size, alphabet_size, adaptive_brea
     :type z_threshold: float
     :return:
         - motif_candidates_dic_list (:py:class:`list of dic`) - list of motif dictionaries
-        - ts_1d (:py:class:`1d array`) - 1-dimensional time-series either resulting from the PCA method or
-         the original 1-dimensional time-series
+        - ts_1d (:py:class:`1d array`) - 1-dimensional time-series either resulting from the PCA method or the original 1-dimensional time-series
     """
     if isinstance(ts, pd.DataFrame):
         ts_1d = extract_pca_ts(ts)

@@ -6,8 +6,11 @@ import seaborn as sns
 def create_motif_table(motif_dic_list):
     """
     This function creates a pandas dataframe with a summary of each motif in motif_dic_list
+
     :param motif_dic_list: list of dictionaries, where a dic is related to a single motif
+    :type motif_dic_list: list of dic
     :return: motif_table_df
+    :rtype: pandas.DataFrame
     """
     pattern_list = [dic['pattern'] for dic in motif_dic_list]
     mdl_cost_list = [dic['mdl_cost'] for dic in motif_dic_list]
@@ -24,18 +27,24 @@ def create_motif_table(motif_dic_list):
     return motif_table_df
 
 
-def plot_single_motif(ts, events_ts, motif_dic, y_label='Full 1-d time-series'):
+def plot_single_motif(ts, events_ts, motif_dic, y_label):
     """
     This function creates the base visualization for a single motif:
      1) plot with the whole time-series highlighting the labels and the position of each motif's member
      2) plot with all the motif's members
      3) plot with the motif's center
+
     :param ts: original 1-dimensional time-series
+    :type ts: 1d array
     :param events_ts: list of labels for each entry in ts (max of 10 labels for avoiding color cycling in the plots)
                       label == 0 is assumed to represent no events and thus it is not plotted
+    :type events_ts: list
     :param motif_dic: dictionary related to the motif
-    :param y_label: label to add in the y-axis of the first plot (optional and defaults to 'Full 1-d time-series')
+    :type motif_dic: dic
+    :param y_label: label to add in the y-axis of the first plot
+    :type y_label: str
     :return: fig - figure with the motif plot
+    :rtype: matplotlib.figure.Figure
     """
     member_pointers = motif_dic['members_ts_pointers']
     center_pointers = motif_dic['center_ts_pointers']
@@ -70,30 +79,41 @@ def plot_single_motif(ts, events_ts, motif_dic, y_label='Full 1-d time-series'):
     return fig
 
 
-def plot_k_motifs(k, ts, events_ts, motif_dic_list):
+def plot_k_motifs(k, ts, events_ts, motif_dic_list, y_label='Full 1-d time-series'):
     """
-    This function shows the base visualisation for the first k motifs in motif_dic_list for the original 1-d time-series
+    This function prints the base visualisation for the first k motifs in motif_dic_list for the original 1-d time-series
+
     :param k: number of motifs to plot
+    :type k: int
     :param ts: original 1-dimensional time-series
+    :type ts: 1d array
     :param events_ts: list of labels for each entry in ts
+    :type events_ts: list
     :param motif_dic_list: list of dictionaries, where a dic is related to a single motif
-    :param yaxis_label:
-    :return: No return - shows the plots
+    :type motif_dic_list: list of dic
+    :param y_label: label to add in the y-axis of the first plot (optional and defaults to 'Full 1-d time-series')
+    :type y_label: str
+    :return: None
     """
     for motif_dic in motif_dic_list[0:k]:
-        plot_single_motif(ts, events_ts, motif_dic)
+        plot_single_motif(ts, events_ts, motif_dic, y_label)
         plt.show()
 
 
 def plot_k_multdim_motifs(k, multidim_ts, events_ts, motif_dic_list):
     """
-    his function shows the base visualisation for the first k motifs in motif_dic_list for the original multidimensional
+    his function prints the base visualisation for the first k motifs in motif_dic_list for the original multidimensional
     time-series. It shows one 1-d plot for each dimension in multidim_ts
+
     :param k: number of motifs to plot
+    :type k: int
     :param multidim_ts: original multidimensional time-series
+    :type multidim_ts: pandas.DataFrame
     :param events_ts: list of labels for each entry in multidim_ts
+    :type events_ts: list
     :param motif_dic_list: list of dictionaries, where a dic is related to a single motif
-    :return: No return - shows the plots
+    :type motif_dic_list: list of dic
+    :return: None
     """
     for motif_dic in motif_dic_list[0:k]:
         for column in multidim_ts.columns:

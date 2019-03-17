@@ -5,16 +5,24 @@ from saxpy.sax import ts_to_string
 
 
 def extract_sax_sequence(ts, win_size, paa_size, alphabet_size, adaptive_break_points, z_threshold=0.01):
-    '''
+    """
     This function applies the sax transformation to a 1-dim time series. Based on saxpy package
+
     :param ts: 1-time series
-    :param win_size: size fo the sliding wndow that generated each sax word
+    :type ts: 1D array
+    :param win_size: size fo the sliding window that generated each sax word
+    :type win_size: int
     :param paa_size: number of characters in a single sax word
+    :type paa_size: int
     :param alphabet_size: number of unique characters to use in the sax representation
+    :type alphabet_size: int
     :param adaptive_break_points: Whether to use a representation with adaptive break-points
+    :type adaptive_break_points: bool
     :param z_threshold: z_threshold for the znorm method from saxpy
-    :return: sax_sequence : list of strings, where each string represents a single sax word
-    '''
+    :type z_threshold: float
+    :return: the sax sequence, a list of strings, where each string represents a single sax word
+    :rtype: list of str
+    """
     if adaptive_break_points:
         sax_sequence = apply_adaptive_sax(ts, win_size, paa_size, alphabet_size, z_threshold)
     else:
@@ -23,15 +31,22 @@ def extract_sax_sequence(ts, win_size, paa_size, alphabet_size, adaptive_break_p
 
 
 def apply_non_adaptive_sax(ts, win_size, paa_size, alphabet_size, z_threshold):
-    '''
-        This function applies the sax transformation to a 1-dim time series using adaptive break-points.
-        :param ts: 1-time series
-        :param win_size: size fo the sliding wndow that generated each sax word
-        :param paa_size: number of characters in a single sax word
-        :param alphabet_size: number of unique characters to use in the sax representation
-        :param z_threshold: z_threshold for the znorm method from saxpy
-        :return: sax_sequence : list of strings, where each string represents a single sax word
-        '''
+    """
+    This function applies the sax transformation to a 1-dim time series using adaptive break-points
+
+    :param ts: 1-time series
+    :type ts: 1D array
+    :param win_size: size fo the sliding window that generated each sax word
+    :type win_size: int
+    :param paa_size: number of characters in a single sax word
+    :type paa_size: int
+    :param alphabet_size: number of unique characters to use in the sax representation
+    :type alphabet_size: int
+    :param z_threshold: z_threshold for the znorm method from saxpy
+    :type z_threshold: float
+    :return: the sax sequence, a list of strings, where each string represents a single sax word
+    :rtype: list of str
+    """
     sax_sequence = []
     cuts = cuts_for_asize(alphabet_size)
     ts_znorm = znorm(ts, z_threshold)
@@ -44,15 +59,22 @@ def apply_non_adaptive_sax(ts, win_size, paa_size, alphabet_size, z_threshold):
 
 
 def apply_adaptive_sax(ts, win_size, paa_size, alphabet_size, z_threshold):
-    '''
-        This function applies the sax transformation to a 1-dim time series using adaptive break-points.
-        :param ts: 1-time series
-        :param win_size: size fo the sliding wndow that generated each sax word
-        :param paa_size: number of characters in a single sax word
-        :param alphabet_size: number of unique characters to use in the sax representation
-        :param z_threshold: z_threshold for the znorm method from saxpy
-        :return: sax_sequence : list of strings, where each string represents a single sax word
-        '''
+    """
+    This function applies the sax transformation to a 1-dim time series using adaptive break-points
+
+    :param ts: 1-time series
+    :type ts: 1D array
+    :param win_size: size fo the sliding window that generated each sax word
+    :type win_size: int
+    :param paa_size: number of characters in a single sax word
+    :type paa_size: int
+    :param alphabet_size: number of unique characters to use in the sax representation
+    :type alphabet_size: int
+    :param z_threshold: z_threshold for the znorm method from saxpy
+    :type z_threshold: float
+    :return: the sax sequence, a list of strings, where each string represents a single sax word
+    :rtype: list of str
+    """
     sax_sequence = []
     cuts = cuts_for_asize(alphabet_size)
     for t in range(0, len(ts) - win_size + 1):

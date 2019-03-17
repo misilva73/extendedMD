@@ -4,8 +4,11 @@ import numpy as np
 def extract_pca_ts(multi_dim_ts):
     """
     This function reduces a multi-dimensional time-series to 1d using PCA
+
     :param multi_dim_ts: multi-dimensional time-series as a pandas dataframe
-    :return: ts_1d: 1-dimensional time-series (numpy array!)
+    :type multi_dim_ts: DataFrame
+    :return: 1-dimensional time-series
+    :rtype: 1d array
     """
     # compute vector with the mean of each time series
     means_vec = multi_dim_ts.agg('mean').values
