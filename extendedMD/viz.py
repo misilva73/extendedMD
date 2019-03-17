@@ -102,7 +102,7 @@ def plot_k_motifs(k, ts, events_ts, motif_dic_list, y_label='Full 1-d time-serie
 
 def plot_k_multdim_motifs(k, multidim_ts, events_ts, motif_dic_list):
     """
-    his function prints the base visualisation for the first k motifs in motif_dic_list for the original multidimensional
+    This function prints the base visualisation for the first k motifs in motif_dic_list for the original multidimensional
     time-series. It shows one 1-d plot for each dimension in multidim_ts
 
     :param k: number of motifs to plot

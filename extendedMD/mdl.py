@@ -26,7 +26,7 @@ def split_bs_len(members_dic_list, bs_len):
     :param members_dic_list: list of dictionaries related to the BS subsequences that belong to a motif
     :type members_dic_list: list of dic
     :param bs_len: list of the lengths of each BS sequence
-    type bs_len: list of int
+    :type bs_len: list of int
     :return: list of split BS lengths
     :rtype: list of list of int
     """
