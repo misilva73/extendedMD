@@ -9,15 +9,19 @@ with open('requirements.txt') as fp:
 
 setuptools.setup(
     name="extendedMD",
-    version="0.8",
+    version="1",
     author="Maria Ines Silva",
     author_email="misilva73@gmail.com",
     description="A small example package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/misilva73/extendedMD",
+    project_urls={
+        'Documentation': 'https://extendedmd.readthedocs.io',
+        'Source': 'https://github.com/misilva73/extendedMD',
+    },
     packages=setuptools.find_packages(),
     install_requires=install_requires,
+    python_requires='>=3',
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
